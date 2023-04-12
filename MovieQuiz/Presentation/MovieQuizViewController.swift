@@ -4,22 +4,26 @@ final class MovieQuizViewController: UIViewController {
     // MARK: - Lifecycle
     
     
-    @IBOutlet weak var yesButton: UIButton!
-    @IBOutlet weak var noButton: UIButton!
+    @IBOutlet private var yesButton: UIButton!
+    @IBOutlet private var noButton: UIButton!
+    @IBOutlet private var imageView: UIImageView!
+    @IBOutlet private var counterLabel: UILabel!
+    @IBOutlet private var textLabel: UILabel!
+    @IBOutlet private var questionTitleLabel: UILabel!
     
     private var currentQuestionIndex = 0 // переменная с индексом текущего вопроса
     private var currentAnswers = 0 // счетчик правильных ответов
     
-    @IBOutlet private var imageView: UIImageView!
-    @IBOutlet private var counterLabel: UILabel!
-    @IBOutlet private var textLabel: UILabel!
-    
-    
-    
     override func viewDidLoad() {
-        
+
         super.viewDidLoad()
         
+        
+        textLabel.font = UIFont(name:"YSDisplay-Bold", size: 23)
+        counterLabel.font = UIFont(name:"YSDisplay-Medium", size: 20)
+        questionTitleLabel.font = UIFont(name:"YSDisplay-Medium", size: 20)
+        noButton.titleLabel?.font = UIFont(name:"YSDisplay-Medium", size: 20)
+        yesButton.titleLabel?.font = UIFont(name:"YSDisplay-Medium", size: 20)
     
         
         let currentQuestion = questions[currentQuestionIndex]
@@ -92,6 +96,8 @@ final class MovieQuizViewController: UIViewController {
     
     // метод покраски рамки в зав-ти от ответа
     private func showAnswerResult(isCorrect: Bool) {
+        yesButton.isEnabled = false
+        noButton.isEnabled = false
         if isCorrect {
             currentAnswers += 1
         }
